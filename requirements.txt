@@ -1,48 +1,47 @@
-# ── Core API ──────────────────────────────────────────────
+# ── Core API ───────────────────────────────────────────────────────────────
 fastapi==0.111.0
 uvicorn[standard]==0.29.0
+mangum==0.17.0
 pydantic==2.7.1
-python-multipart==0.0.9        # file uploads in FastAPI
+python-multipart==0.0.9
 
-# ── LLM + RAG ─────────────────────────────────────────────
-openai==1.30.1                 # works with Azure OpenAI endpoint
-httpx==0.27.0                  # your existing HTTP client
+# ── LangChain + LangGraph ──────────────────────────────────────────────────
 langchain==0.2.1
 langchain-openai==0.1.8
-langgraph==0.1.1
-tiktoken==0.7.0                # token counting for cost tracker
+langchain-community==0.2.1
+langchain-core==0.2.5
+langgraph==0.1.5
 
-# ── Embeddings + PDF ──────────────────────────────────────
-transformers==4.41.1
-torch==2.3.0
-sentence-transformers==3.0.0
-PyMuPDF==1.24.4                # fitz — your existing PDF reader
+# ── Azure OpenAI ───────────────────────────────────────────────────────────
+openai==1.30.1
 
-# ── Vector store (local) ──────────────────────────────────
-faiss-cpu==1.8.0               # lightweight local vector search
+# ── Pinecone ───────────────────────────────────────────────────────────────
+pinecone-client==3.2.2
+langchain-pinecone==0.1.1
 
-# ── MLOps ─────────────────────────────────────────────────
-mlflow==2.13.0
-apache-airflow==2.9.1
-evidently==0.4.30
-shap==0.45.1
+# ── Embeddings ────────────────────────────────────────────────────────────
+peft==0.11.1
 scikit-learn==1.5.0
-pandas==2.2.2
 numpy==1.26.4
 
-# ── Evals ─────────────────────────────────────────────────
-ragas==0.1.9
-datasets==2.19.1               # ragas dependency
+# ── PDF Processing ─────────────────────────────────────────────────────────
+pymupdf==1.24.4
 
-# ── Observability ─────────────────────────────────────────
-langfuse==2.26.0
-python-json-logger==2.0.7      # structured JSON logging
+# ── Observability ──────────────────────────────────────────────────────────
+langfuse==2.20.0
 
-# ── Safety ────────────────────────────────────────────────
-presidio-analyzer==2.2.354     # PII detection in outputs
-presidio-anonymizer==2.2.354
+# ── MLflow ─────────────────────────────────────────────────────────────────
+mlflow==2.13.0
 
-# ── Utilities ─────────────────────────────────────────────
-python-dotenv==1.0.1           # load .env for API keys
-tenacity==8.3.0                # retry logic
-pyyaml==6.0.1
+# ── Logging ────────────────────────────────────────────────────────────────
+python-json-logger==2.0.7
+
+# ── HTTP + Retry ───────────────────────────────────────────────────────────
+httpx==0.27.0
+tenacity==8.3.0
+tiktoken==0.7.0
+
+# ── TensorFlow ─────────────────────────────────────────────────────────────
+tensorflow-cpu==2.16.1
+cohere==5.5.0
+langchain-cohere==0.1.4
