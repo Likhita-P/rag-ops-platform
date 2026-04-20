@@ -1,14 +1,12 @@
 FROM public.ecr.aws/lambda/python:3.11
 
-RUN yum install -y gcc10 gcc10-c++ make && \
-    ln -sf /usr/bin/gcc10 /usr/bin/gcc && \
-    ln -sf /usr/bin/g++10 /usr/bin/g++ && \
-    yum clean all
-
 RUN pip install --upgrade pip
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir \
+    numpy==1.26.4 \
+    --only-binary=:all: && \
+    pip install --no-cache-dir -r requirements.txt
 
 COPY app/        ${LAMBDA_TASK_ROOT}/app/
 COPY agent/      ${LAMBDA_TASK_ROOT}/agent/
