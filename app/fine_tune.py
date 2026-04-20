@@ -34,13 +34,20 @@ import json
 import logging
 from typing import List, Tuple, Optional
 
-import numpy as np
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
-from transformers import AutoTokenizer, AutoModel
-from peft import get_peft_model, LoraConfig, TaskType
+# Lazy imports — only loaded when /finetune endpoint is called
+# Not installed in production requirements (too heavy for App Runner)
+# Run fine-tuning separately on Google Colab
+
+try:
+    import torch
+    import torch.nn as nn
+    import torch.nn.functional as F
+    from torch.utils.data import Dataset, DataLoader
+    from transformers import AutoTokenizer, AutoModel
+    from peft import get_peft_model, LoraConfig, TaskType
+    TORCH_AVAILABLE = True
+except ImportError:
+    TORCH_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -366,7 +373,8 @@ def run_fine_tuning(
         f"Starting fine-tuning: epochs={epochs}, batch_size={batch_size}, "
         f"lr={learning_rate}, base_model={BASE_MODEL}"
     )
-
+    if not TORCH_AVAILABLE: 
+        return {"error": "Fine-tuning not available in cloud deployment. Run on Google Colab instead."}
     if training_data is None:
         training_data = load_training_data()
 

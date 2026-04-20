@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 from app.schemas import CostRecord
 
 logger       = logging.getLogger(__name__)
-COST_LOG     = os.getenv("COST_LOG_PATH", "logs/cost_log.jsonl")
+COST_LOG     = os.getenv("COST_LOG_PATH", "/tmp/logs/cost_log.jsonl")
 DAILY_BUDGET = float(os.getenv("DAILY_BUDGET_USD", "10.0"))
 
 

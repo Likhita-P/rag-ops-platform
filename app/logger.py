@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 from pythonjsonlogger import jsonlogger
 
 LOG_DIR  = os.getenv("LOG_DIR", "logs")
-LOG_FILE = os.path.join(LOG_DIR, "requests.jsonl")
+LOG_FILE = os.path.join(LOG_DIR, "/tmp/logs")
 
 
 def setup_logging():

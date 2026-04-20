@@ -20,7 +20,7 @@ from typing import Dict
 
 logger = logging.getLogger(__name__)
 
-PROMPTS_DIR = os.getenv("PROMPTS_DIR", "prompts")
+PROMPTS_DIR = os.getenv("PROMPTS_DIR", "/tmp/prompts")
 
 
 def load_prompt(version: str = "v1") -> Dict[str, str]:
