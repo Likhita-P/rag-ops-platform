@@ -17,7 +17,6 @@ import requests
 import json
 
 API_BASE = "http://localhost:8000"
-
 st.set_page_config(
     page_title="AI Ops Intelligence Platform",
     page_icon="🤖",
