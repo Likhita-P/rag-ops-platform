@@ -1,6 +1,10 @@
 FROM public.ecr.aws/lambda/python:3.11
 
-RUN yum install -y gcc gcc-c++ make && yum clean all
+RUN yum install -y gcc10 gcc10-c++ make && \
+    ln -sf /usr/bin/gcc10 /usr/bin/gcc && \
+    ln -sf /usr/bin/g++10 /usr/bin/g++ && \
+    yum clean all
+
 RUN pip install --upgrade pip
 
 COPY requirements.txt .
