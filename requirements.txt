@@ -13,7 +13,7 @@ openai
 cohere
 pinecone-client
 langchain-pinecone
-numpy
+"numpy<2.0"
 scikit-learn
 peft
 pymupdf
