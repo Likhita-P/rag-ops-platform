@@ -6,7 +6,7 @@ RAG pipeline using LangChain + Pinecone + Langfuse.
 import time
 import logging
 
-from app.langchain_client import call_llm_with_context, estimate_cost
+from app.llm_client  import call_llm_with_context, estimate_cost
 from app.vector_store     import retrieve_chunks
 from app.prompt_store     import get_system_prompt
 from app.cost_tracker     import build_cost_record, log_cost, is_budget_exceeded
