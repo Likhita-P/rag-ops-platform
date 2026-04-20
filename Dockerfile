@@ -1,21 +1,22 @@
-FROM public.ecr.aws/lambda/python:3.11
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y \
+    gcc g++ make \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir \
-    numpy==1.26.4 \
-    --only-binary=:all: && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app/        ${LAMBDA_TASK_ROOT}/app/
-COPY agent/      ${LAMBDA_TASK_ROOT}/agent/
-COPY pipelines/  ${LAMBDA_TASK_ROOT}/pipelines/
-COPY monitoring/ ${LAMBDA_TASK_ROOT}/monitoring/
-COPY evals/      ${LAMBDA_TASK_ROOT}/evals/
+COPY app/        /app/app/
+COPY agent/      /app/agent/
+COPY pipelines/  /app/pipelines/
+COPY monitoring/ /app/monitoring/
+COPY evals/      /app/evals/
 
-RUN mkdir -p ${LAMBDA_TASK_ROOT}/prompts
-RUN mkdir -p /tmp/logs
-RUN mkdir -p /tmp/data
+RUN mkdir -p /app/prompts /tmp/logs /tmp/data
 
-CMD ["app.main.handler"]
+WORKDIR /app
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
