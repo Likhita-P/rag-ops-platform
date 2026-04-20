@@ -51,6 +51,16 @@ def root():
         return {"error": f"index.html not found at: {index}"}
     return FileResponse(index)
 
+@app.get("/debug")
+def debug():
+    return {
+        "static_path": static_path,
+        "exists": os.path.exists(static_path),
+        "index_exists": os.path.exists(os.path.join(static_path, "index.html")),
+        "app_dir": os.path.dirname(__file__),
+        "cwd": os.getcwd(),
+    }
+    
 @app.get("/health")
 def health():
     return {"status": "ok", "version": "2.0.0"}
