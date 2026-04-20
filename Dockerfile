@@ -1,5 +1,8 @@
 FROM public.ecr.aws/lambda/python:3.11
 
+RUN yum install -y gcc gcc-c++ make && yum clean all
+RUN pip install --upgrade pip
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
