@@ -4,10 +4,6 @@ schemas.py
 All Pydantic request/response models for the AI Ops Platform.
 Every API endpoint uses these — no raw dicts anywhere.
 
-Interview angle (ACKO Round 2):
-  "I define strict input/output contracts with Pydantic so malformed
-   LLM output fails fast with a clear error instead of silently
-   propagating bad data downstream."
 """
 
 from pydantic import BaseModel, Field

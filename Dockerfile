@@ -9,6 +9,8 @@ RUN pip install --upgrade pip
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')"
+
 COPY app/        /app/app/
 COPY agent/      /app/agent/
 COPY pipelines/  /app/pipelines/

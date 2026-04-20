@@ -24,3 +24,6 @@ httpx
 tenacity
 tiktoken
 aiofiles
+pinecone-client
+sentence-transformers
+langfuse
