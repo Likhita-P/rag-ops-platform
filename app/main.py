@@ -44,8 +44,13 @@ if os.path.exists(static_path):
 
 @app.get("/")
 def root():
-    return FileResponse(os.path.join(static_path, "index.html"))
-    
+    if not os.path.exists(static_path):
+        return {"error": f"static_path not found: {static_path}"}
+    index = os.path.join(static_path, "index.html")
+    if not os.path.exists(index):
+        return {"error": f"index.html not found at: {index}"}
+    return FileResponse(index)
+
 @app.get("/health")
 def health():
     return {"status": "ok", "version": "2.0.0"}
