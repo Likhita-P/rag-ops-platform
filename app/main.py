@@ -3,6 +3,8 @@ import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from app.logger       import setup_logging
 from app.prompt_store import create_prompt_files, list_versions
@@ -35,7 +37,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# Serve static UI
+static_path = os.path.join(os.path.dirname(__file__), "static")
+if os.path.exists(static_path):
+    app.mount("/static", StaticFiles(directory=static_path), name="static")
 
+@app.get("/")
+def root():
+    return FileResponse(os.path.join(static_path, "index.html"))
+    
 @app.get("/health")
 def health():
     return {"status": "ok", "version": "2.0.0"}

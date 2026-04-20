@@ -14,6 +14,7 @@ COPY agent/      /app/agent/
 COPY pipelines/  /app/pipelines/
 COPY monitoring/ /app/monitoring/
 COPY evals/      /app/evals/
+COPY app/static/ /app/app/static/
 
 RUN mkdir -p /app/prompts /tmp/logs /tmp/data
 

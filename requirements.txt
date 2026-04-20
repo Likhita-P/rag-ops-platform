@@ -23,3 +23,4 @@ python-json-logger
 httpx
 tenacity
 tiktoken
+aiofiles
